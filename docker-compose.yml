@@ -1,0 +1,15 @@
+services:
+  db:
+    image: postgres:16-alpine
+    container_name: mapi-db
+    environment:
+      POSTGRES_DB: mapi_db
+      POSTGRES_USER: ${DB_USER}
+      POSTGRES_PASSWORD: ${DB_PASSWORD}
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_mapi_data:/var/lib/postgresql/data
+
+volumes:
+  postgres_mapi_data:
