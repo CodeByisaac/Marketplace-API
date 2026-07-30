@@ -1,4 +1,4 @@
-package com.codebyisaac.mapi.entity;
+package com.codebyisaac.mapi.repository;
 
 import com.codebyisaac.mapi.entity.OrderItem;
 import org.springframework.data.jpa.repository.JpaRepository;
