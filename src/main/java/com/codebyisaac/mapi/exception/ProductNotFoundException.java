@@ -1,4 +1,7 @@
 package com.codebyisaac.mapi.exception;
 
-public class ProductNotFoundException {
+public class ProductNotFoundException extends RuntimeException {
+    public ProductNotFoundException(String id){
+        super("Product not found" + id);
+    }
 }
