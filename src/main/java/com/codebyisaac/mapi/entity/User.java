@@ -1,11 +1,16 @@
 package com.codebyisaac.mapi.entity;
 
 import jakarta.persistence.*;
+import lombok.Getter;
+import lombok.Setter;
+import lombok.ToString;
 
 import java.util.ArrayList;
 import java.util.List;
 
 @Entity
+@Getter @Setter
+@ToString(exclude = "orders")
 @Table(name="users")
 public class User {
 

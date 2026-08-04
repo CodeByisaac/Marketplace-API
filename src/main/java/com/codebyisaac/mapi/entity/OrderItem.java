@@ -1,13 +1,15 @@
 package com.codebyisaac.mapi.entity;
 
 import jakarta.persistence.*;
+import lombok.Getter;
+import lombok.Setter;
 
 import java.math.BigDecimal;
 
 @Entity
+@Getter @Setter
 @Table(name="order_items")
 public class OrderItem {
-
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
     private String id;
@@ -25,5 +27,4 @@ public class OrderItem {
 
     @Column(nullable = false)
     private BigDecimal priceAtPurchase;
-
 }
