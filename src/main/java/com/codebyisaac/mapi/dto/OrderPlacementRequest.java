@@ -3,17 +3,9 @@ package com.codebyisaac.mapi.dto;
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotEmpty;
-import lombok.Value;
 
 import java.util.List;
 
-@Value
-public class OrderPlacementRequest {
+public record OrderPlacementRequest(@NotBlank String userId, @NotEmpty @Valid List<OrderItemRequest> items) {
 
-    @NotBlank
-    String userId;
-
-    @NotEmpty
-    @Valid
-    List<OrderItemRequest> items;
 }
