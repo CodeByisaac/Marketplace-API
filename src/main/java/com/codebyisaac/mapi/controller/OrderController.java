@@ -22,7 +22,7 @@ public class OrderController {
     @PostMapping
     public ResponseEntity<APIResponse<OrderResponse>> placeOrder(@Valid @RequestBody OrderPlacementRequest request) {
 
-        OrderResponse orderResponse = orderService.createOrder(request.getUserId(), request);
+        OrderResponse orderResponse = orderService.createOrder(request.userId(), request);
 
         APIResponse<OrderResponse> responseDTO = APIResponse
                 .<OrderResponse>builder()

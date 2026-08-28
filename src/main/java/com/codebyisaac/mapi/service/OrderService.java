@@ -33,7 +33,7 @@ public class OrderService {
 
     @Transactional
     public OrderResponse createOrder(String userId, OrderPlacementRequest request) {
-        log.info("Creating order: user={} itemCount{}", userId, request.getItems().size());
+        log.info("Creating order: user={} itemCount{}", userId, request.items().size());
 
         User user = userRepository.findById(userId).orElseThrow( () -> new UserNotFoundException(userId));
 
@@ -42,24 +42,24 @@ public class OrderService {
 
         BigDecimal total = BigDecimal.ZERO;
 
-        for (OrderItemRequest itemReq : request.getItems()) {
-            Product product = productRepository.findById(itemReq.getProductId())
-                    .orElseThrow(()-> new ProductNotFoundException(itemReq.getProductId()));
+        for (OrderItemRequest itemReq : request.items()) {
+            Product product = productRepository.findById(itemReq.productId())
+                    .orElseThrow(()-> new ProductNotFoundException(itemReq.productId()));
 
-            if (product.getStockQuantity() < itemReq.getQuantity()) {
-                throw new InsufficientStockException(product.getId(), itemReq.getQuantity(), product.getStockQuantity());
+            if (product.getStockQuantity() < itemReq.quantity()) {
+                throw new InsufficientStockException(product.getId(), itemReq.quantity(), product.getStockQuantity());
             }
 
-            product.setStockQuantity(product.getStockQuantity() - itemReq.getQuantity());
+            product.setStockQuantity(product.getStockQuantity() - itemReq.quantity());
 
             OrderItem item = new OrderItem();
             item.setProduct(product);
             item.setOrder(order);
-            item.setQuantity(itemReq.getQuantity());
+            item.setQuantity(itemReq.quantity());
             item.setPriceAtPurchase(product.getPrice());
 
             order.getItems().add(item);
-            total = total.add(product.getPrice().multiply(BigDecimal.valueOf(itemReq.getQuantity())));
+            total = total.add(product.getPrice().multiply(BigDecimal.valueOf(itemReq.quantity())));
         }
         order.setTotalPrice(total);
 
