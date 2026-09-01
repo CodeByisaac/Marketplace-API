@@ -13,6 +13,6 @@ public interface OrderRepository extends JpaRepository<Order, String> {
     @Query("SELECT o FROM Order o JOIN FETCH o.items")
     List<Order> findAllWithItems();
 
-    @Query("SELECT o FROM Order o JOIN FETCH o.items WHERE o.userId = :userId")
+    @Query("SELECT o FROM Order o JOIN FETCH o.items WHERE o.user.id = :userId")
     List<Order> findByUserIdWithItems(@Param("userId") String userId);
 }
